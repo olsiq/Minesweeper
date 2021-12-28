@@ -8,6 +8,15 @@ let gameArray = gameLogic.view;
 let row = gameLogic.row;
 let col = gameLogic.col;
 let bombs = gameLogic.bombs;
+//flags counter
+let flags = bombs;
+//empty cells counter
+let cellsToOpen = row * col - bombs;
+console.log(
+  `total cells =${
+    row * col
+  }, empty cells=${cellsToOpen}, bombs to clear =${bombs}`
+);
 
 console.log(`${row} rows || ${col} colums || ${bombs} bombs`);
 console.log(gameArray);
@@ -70,7 +79,6 @@ const makeGrid = (Array) => {
           //timer will stop
           stopTimer();
           //disable clicks on the cells
-          disableClick(cell);
           //
           gameOver(grid);
 
@@ -79,13 +87,16 @@ const makeGrid = (Array) => {
           cell.setAttribute("data-pressed", true);
           cell.setAttribute("data-value", "0");
           cell.innerText = "";
+          //if cell is open prevent from clicking it again
           disableClick(cell);
+
           break;
 
         default:
           cell.setAttribute("data-pressed", true);
           cell.setAttribute("data-value", c);
           cell.innerText = c;
+          //if cell is open prevent from clicking it again
           disableClick(cell);
           break;
       }
@@ -93,10 +104,11 @@ const makeGrid = (Array) => {
 
     grid.appendChild(cell).className = "grid-item";
     cell.classList.add(index + 1);
-
+    //disable click functions
     const disableClick = (x) => {
       x.style.pointerEvents = "none";
     };
+    //gameOver function
     const gameOver = (x) => {
       x.classList.add("game-over");
       console.log("game over");
