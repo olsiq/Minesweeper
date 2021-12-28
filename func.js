@@ -1,7 +1,7 @@
 //variables
 export const row = 7;
 export const col = 5;
-export const bombs = 5;
+export const bombs = 1;
 export const totalCells = row * col;
 
 //makebombs function

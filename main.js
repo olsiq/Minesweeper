@@ -8,6 +8,9 @@ let gameArray = gameLogic.view;
 let row = gameLogic.row;
 let col = gameLogic.col;
 let bombs = gameLogic.bombs;
+//changing the css grid
+grid.style.setProperty("--grid-rows", row);
+grid.style.setProperty("--grid-cols", col);
 //flags counter
 let flags = bombs;
 //empty cells counter
@@ -17,40 +20,54 @@ console.log(
     row * col
   }, empty cells=${cellsToOpen}, bombs to clear =${bombs}`
 );
+//initialize timer
+let sec = 0;
+let min = 0;
+const timer = document.getElementById("timer");
+//timer function
+const Timer = () => {
+  sec++;
+  if (sec === 60) {
+    sec = 0;
+    min++;
+  }
+  timer.innerHTML = `${min}:${sec}`;
+};
+//set a timer id to null
+let Timer_Id = null;
 
-console.log(`${row} rows || ${col} colums || ${bombs} bombs`);
-console.log(gameArray);
-grid.style.setProperty("--grid-rows", row);
-grid.style.setProperty("--grid-cols", col);
+//start timer function will assign the set interval id to timer id
+const startTimer = () => {
+  Timer_Id = setInterval(Timer, 1000);
+  return Timer_Id;
+};
+
+//stop timer function stops the interval with the timer idd
+const stopTimer = () => clearInterval(Timer_Id);
+//only  the first time they click should start the timer
+let firstClick = true;
+
+//getting and setting the innerhtml to the flag-counter element
+const flagCounter = document.querySelector("#flag-counter");
+flagCounter.innerHTML = flags;
+
+//decrement flags function
+const decrementFlags = () =>
+  flags === 0 ? console.log("no more flags") : flags--;
+
+//decrement cells function
+const decrementCellsToOpen = () => {
+  cellsToOpen === 1 ? youWin() : cellsToOpen--;
+};
+
+//you win function
+const youWin = () => {
+  stopTimer();
+  console.log("set name and time to highscores");
+};
 const makeGrid = (Array) => {
-  //initialize timer
-  let sec = 0;
-  let min = 0;
-  const timer = document.getElementById("timer");
-  //timer function
-  const Timer = () => {
-    sec++;
-    if (sec === 60) {
-      sec = 0;
-      min++;
-    }
-    timer.innerHTML = `${min}:${sec}`;
-  };
-  //set a timer id to null
-  let Timer_Id = null;
-
-  //start timer function will assign the set interval id to timer id
-  const startTimer = () => {
-    Timer_Id = setInterval(Timer, 1000);
-    return Timer_Id;
-  };
-
-  //stop timer function stops the interval with the timer idd
-  const stopTimer = () => clearInterval(Timer_Id);
-  //only  the first time they click should start the timer
-  let firstClick = true;
-
   //initialize game
+  console.log(gameArray);
   Array.map((c, index) => {
     let cell = document.createElement("div");
 
@@ -70,7 +87,6 @@ const makeGrid = (Array) => {
         firstClick = false;
         startTimer();
       }
-
       switch (c) {
         case "bomb":
           cell.innerHTML = "💣";
@@ -89,6 +105,7 @@ const makeGrid = (Array) => {
           cell.innerText = "";
           //if cell is open prevent from clicking it again
           disableClick(cell);
+          decrementCellsToOpen();
 
           break;
 
@@ -98,6 +115,7 @@ const makeGrid = (Array) => {
           cell.innerText = c;
           //if cell is open prevent from clicking it again
           disableClick(cell);
+          decrementCellsToOpen();
           break;
       }
     });
