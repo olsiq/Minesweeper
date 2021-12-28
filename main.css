@@ -25,7 +25,7 @@ body {
 .flags {
   width: 100%;
   flex-wrap: wrap;
-  border: 1px red solid;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +34,7 @@ body {
 .timer {
   width: 100%;
   flex-wrap: wrap;
-  border: 1px red solid;
+  border-left: 1px solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
