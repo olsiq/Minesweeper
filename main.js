@@ -133,4 +133,5 @@ const makeGrid = (Array) => {
     };
   });
 };
-let game = makeGrid(gameArray);
+
+makeGrid(gameArray);
