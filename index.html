@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>minesweeper</h1>
+    <div class="wrapper">
+      <div class="info">
+        <div class="flags">
+          <p>Flags:</p>
+          <p id="flag-counter">10</p>
+        </div>
+        <div class="timer">
+          <p>Timer:</p>
+          <p id="timer">0:0</p>
+        </div>
+      </div>
+      <div id="grid"></div>
+    </div>
+    <div class="controls">
+      <label for="level">Choose Level:</label>
+      <select id="lvl" name="level" onchange="setLevel">
+        <option value="easy">Easy</option>
+        <option value="difficult">Difficult</option>
+        <option value="expert">Expert</option>
+      </select>
+      <div class="btns">
+        <button for="level">start</button><button>high score</button>
+      </div>
+    </div>
+  </body>
+  <script src="timer.js" type="module"></script>
+  <script src="controls.js" type="module"></script>
+  <script src="main.js" type="module"></script>
+</html>
