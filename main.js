@@ -18,8 +18,8 @@ const makeGrid = (Array) => {
   let sec = 0;
   let min = 0;
   const timer = document.getElementById("timer");
-
-  const startTimer = () => {
+  //timer function
+  const Timer = () => {
     sec++;
     if (sec === 60) {
       sec = 0;
@@ -27,6 +27,19 @@ const makeGrid = (Array) => {
     }
     timer.innerHTML = `${min}:${sec}`;
   };
+  //set a timer id to null
+  let Timer_Id = null;
+
+  //start timer function will assign the set interval id to timer id
+  const startTimer = () => {
+    Timer_Id = setInterval(Timer, 1000);
+    return Timer_Id;
+  };
+
+  //stop timer function stops the interval with the timer idd
+  const stopTimer = () => clearInterval(Timer_Id);
+  //only  the first time they click should start the timer
+  let firstClick = true;
 
   //initialize game
   Array.map((c, index) => {
@@ -36,21 +49,17 @@ const makeGrid = (Array) => {
     cell.setAttribute("data-hasBomb", "N/A");
     cell.setAttribute("isFlaged", false);
 
-    // cell.addEventListener("oncontextmenu", (e) => {
-    //   console.loc("it works");
-    //   e.preventDefault();
-    //   cell.toggleAttribute("marked");
-    // });
-    //on click events function
+    //timer section
 
     let x = cell.getAttribute("data-pressed");
     cell.addEventListener("click", () => {
       cell.setAttribute("data-pressed", true);
-      let setTimer;
-      let firstClick = true;
-      if (firstClick) {
+
+      //the first time users click timer function executes
+      //firstClick =false so the timer function doesnt executes again
+      if (firstClick == true) {
         firstClick = false;
-        setTimer = setInterval(startTimer, 100);
+        startTimer();
       }
 
       switch (c) {
@@ -58,8 +67,11 @@ const makeGrid = (Array) => {
           cell.innerHTML = "💣";
           cell.classList.add("bomb");
           cell.setAttribute("data-hasBomb", true);
-          clearInterval(setTimer);
+          //timer will stop
+          stopTimer();
+          //disable clicks on the cells
           disableClick(cell);
+          //
           gameOver(grid);
 
           break;
@@ -71,7 +83,6 @@ const makeGrid = (Array) => {
           break;
 
         default:
-          console.log(c);
           cell.setAttribute("data-pressed", true);
           cell.setAttribute("data-value", c);
           cell.innerText = c;
