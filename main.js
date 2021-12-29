@@ -139,10 +139,16 @@ const makeGrid = (Array) => {
 };
 
 makeGrid(gameArray);
-
+const clearGame = () => {
+  const gameBoard = document.getElementById("grid");
+  while (gameBoard.lastElementChild) {
+    gameBoard.removeChild(gameBoard.lastElementChild);
+  }
+};
 const btn = document.querySelector(".btn");
 btn.addEventListener("click", (e) => {
   e.preventDefault;
+  clearGame();
   controls.setLevel();
   makeGrid(gameArray);
 });
