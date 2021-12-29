@@ -21,9 +21,6 @@ const makebombs = (bombs, totalCells) => {
   return bombArray;
 };
 const bombArray = makebombs(bombs, totalCells).sort((a, b) => a - b);
-//test
-
-// const bombArray = [1, 3, 5, 11, 13, 15, 21, 23, 14, 25];
 
 // find Cells Position function
 const cellPosition = (cell, col, totalCells) => {
@@ -125,14 +122,15 @@ const findNeighbors = (bcell, col, x) => {
   return Cells;
 };
 //find cells that are neighbours of bomb cells
-const neighbour = bombArray.map((x) => {
-  let position = cellPosition(x, col, totalCells);
-  //console.log(`cell position is ${position},cell ${x}`);
-  let neighborCells = findNeighbors(position, col, x);
-  //console.log(`neighbour position is ${neighborCells}`);
-  return neighborCells;
-});
-
+const neighbours = () =>
+  bombArray.map((x) => {
+    let position = cellPosition(x, col, totalCells);
+    //console.log(`cell position is ${position},cell ${x}`);
+    let neighborCells = findNeighbors(position, col, x);
+    //console.log(`neighbour position is ${neighborCells}`);
+    return neighborCells;
+  });
+const neighbour = neighbours();
 //merge and sort all the neighbour cells together
 const allNeighbours = [].concat(...neighbour);
 allNeighbours.sort((a, b) => a - b);

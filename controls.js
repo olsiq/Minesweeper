@@ -1,13 +1,13 @@
-let row = 10;
-let col = 5;
+let row = 5;
+let col = 10;
 let bombs = 10;
 export const setLevel = () => {
   let level = document.getElementById("lvl").value;
   console.log(level);
   switch (level) {
     case "easy":
-      row = 10;
-      col = 5;
+      row = 5;
+      col = 10;
       bombs = 10;
       console.log(bombs, row, col);
       break;
