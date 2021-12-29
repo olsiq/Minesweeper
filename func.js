@@ -1,9 +1,14 @@
 //variables
-export const row = 7;
-export const col = 5;
-export const bombs = 1;
-export const totalCells = row * col;
+// export let row = 7;
+// export const col = 5;
+// export const bombs = 1;
+// export const totalCells = row * col;
+import * as controls from "./controls.js";
 
+let row = controls.row;
+let col = controls.col;
+let bombs = controls.bombs;
+let totalCells = row * col;
 //makebombs function
 
 const makebombs = (bombs, totalCells) => {

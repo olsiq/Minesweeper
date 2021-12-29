@@ -1,13 +1,17 @@
 import * as gameLogic from "./func.js";
-
+import * as controls from "./controls.js";
+controls.setLevel();
 //initialize game
 
 //variables
 const grid = document.getElementById("grid");
 let gameArray = gameLogic.view;
-let row = gameLogic.row;
-let col = gameLogic.col;
-let bombs = gameLogic.bombs;
+// let row = gameLogic.row;
+// let col = gameLogic.col;
+// let bombs = gameLogic.bombs;
+let row = controls.row;
+let col = controls.col;
+let bombs = controls.bombs;
 //changing the css grid
 grid.style.setProperty("--grid-rows", row);
 grid.style.setProperty("--grid-cols", col);
@@ -135,3 +139,10 @@ const makeGrid = (Array) => {
 };
 
 makeGrid(gameArray);
+
+const btn = document.querySelector(".btn");
+btn.addEventListener("click", (e) => {
+  e.preventDefault;
+  controls.setLevel();
+  makeGrid(gameArray);
+});

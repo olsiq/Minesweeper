@@ -24,17 +24,19 @@
     </div>
     <div class="controls">
       <label for="level">Choose Level:</label>
-      <select id="lvl" name="level" onchange="setLevel">
+      <select id="lvl" name="level">
         <option value="easy">Easy</option>
         <option value="difficult">Difficult</option>
         <option value="expert">Expert</option>
       </select>
       <div class="btns">
-        <button for="level">start</button><button>high score</button>
+        <button for="level" class="btn">start</button
+        ><button>high score</button>
       </div>
     </div>
   </body>
 
   <script src="controls.js" type="module"></script>
+  <script src="func.js" type="module"></script>
   <script src="main.js" type="module"></script>
 </html>
