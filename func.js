@@ -9,8 +9,9 @@ let row = controls.row;
 let col = controls.col;
 let bombs = controls.bombs;
 let totalCells = row * col;
+controls.setLevel();
 //makebombs function
-
+console.log(` at func.js bombs are ${bombs}, rows are ${row},cols are ${col}`);
 const makebombs = (bombs, totalCells) => {
   let bombArray = new Array(bombs);
   const randomNumbers = new Array(totalCells)
@@ -20,8 +21,6 @@ const makebombs = (bombs, totalCells) => {
   bombArray = randomNumbers.slice(0, bombs);
   return bombArray;
 };
-const bombArray = makebombs(bombs, totalCells).sort((a, b) => a - b);
-
 // find Cells Position function
 const cellPosition = (cell, col, totalCells) => {
   let position = "";
@@ -122,37 +121,41 @@ const findNeighbors = (bcell, col, x) => {
   return Cells;
 };
 //find cells that are neighbours of bomb cells
-const neighbours = () =>
-  bombArray.map((x) => {
+const neighbours = (array) =>
+  array.map((x) => {
     let position = cellPosition(x, col, totalCells);
     //console.log(`cell position is ${position},cell ${x}`);
     let neighborCells = findNeighbors(position, col, x);
     //console.log(`neighbour position is ${neighborCells}`);
     return neighborCells;
   });
-const neighbour = neighbours();
-//merge and sort all the neighbour cells together
-const allNeighbours = [].concat(...neighbour);
-allNeighbours.sort((a, b) => a - b);
-allNeighbours.filter((x) => {
-  bombArray.includes(x) ? (x = "bomb") : (x = x);
-});
 
 //game array
+export const view = () => {
+  const gameArray = new Array(totalCells).fill().map((_, index) => index + 1);
+  const bombArray = makebombs(bombs, totalCells).sort((a, b) => a - b);
 
-const gameArray = new Array(totalCells).fill().map((_, index) => index + 1);
-export let view = gameArray.map((x) => {
-  const innerValues = (x) => {
-    if (bombArray.includes(x)) {
-      return "bomb";
-    } else if (allNeighbours.includes(x)) {
-      let filter = allNeighbours.filter((y) => x === y);
-      filter = filter.length;
-      return filter;
-    } else {
-      return "";
-    }
-  };
+  const neighbour = neighbours(bombArray);
+  //merge and sort all the neighbour cells together
+  const allNeighbours = [].concat(...neighbour);
+  allNeighbours.sort((a, b) => a - b);
+  allNeighbours.filter((x) => {
+    bombArray.includes(x) ? (x = "bomb") : (x = x);
+  });
+  let view = gameArray.map((x) => {
+    const innerValues = (x) => {
+      if (bombArray.includes(x)) {
+        return "bomb";
+      } else if (allNeighbours.includes(x)) {
+        let filter = allNeighbours.filter((y) => x === y);
+        filter = filter.length;
+        return filter;
+      } else {
+        return "";
+      }
+    };
 
-  return innerValues(x);
-});
+    return innerValues(x);
+  });
+  return view;
+};

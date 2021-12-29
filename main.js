@@ -5,7 +5,7 @@ controls.setLevel();
 
 //variables
 const grid = document.getElementById("grid");
-let gameArray = gameLogic.view;
+let gameArray = gameLogic.view();
 // let row = gameLogic.row;
 // let col = gameLogic.col;
 // let bombs = gameLogic.bombs;
