@@ -1,7 +1,7 @@
-import * as gameLogic from "./func.js";
+import gameLogic from "./func.js";
 import * as controls from "./controls.js";
 //initialize gameBoard
-let gameArray = gameLogic.view();
+let gameArray = gameLogic();
 //initialize timer
 let sec = 0;
 let min = 0;
@@ -40,30 +40,7 @@ const makeGrid = (Array) => {
   let flags = bombs;
   //empty cells counter
   let cellsToOpen = row * col - bombs;
-  // //initialize timer
-  // let sec = 0;
-  // let min = 0;
-  // const timer = document.getElementById("timer");
-  // //timer function
-  // const Timer = () => {
-  //   sec++;
-  //   if (sec === 60) {
-  //     sec = 0;
-  //     min++;
-  //   }
-  //   timer.innerHTML = `${min}:${sec}`;
-  // };
-  // //set a timer id to null
-  // let Timer_Id = null;
 
-  // //start timer function will assign the set interval id to timer id
-  // const startTimer = () => {
-  //   Timer_Id = setInterval(Timer, 1000);
-  //   return Timer_Id;
-  // };
-
-  // //stop timer function stops the interval with the timer idd
-  // const stopTimer = () => clearInterval(Timer_Id);
   //only  the first time they click should start the timer
   let firstClick = true;
 
@@ -116,7 +93,6 @@ const makeGrid = (Array) => {
           //timer will stop
           stopTimer();
           //disable clicks on the cells
-          //
           gameOver(grid);
 
           break;
@@ -175,5 +151,6 @@ btn.addEventListener("click", (e) => {
   min = 0;
   sec = 0;
   timer.innerHTML = `${min}:${sec}`;
+  gameArray = gameLogic();
   makeGrid(gameArray);
 });
