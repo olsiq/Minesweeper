@@ -1,15 +1,10 @@
 //variables
-// export let row = 7;
-// export const col = 5;
-// export const bombs = 1;
-// export const totalCells = row * col;
-import * as controls from "./controls.js";
 
-let row = controls.row;
-let col = controls.col;
-let bombs = controls.bombs;
+import * as controls from "./controls.js";
+let input = controls.setLevel();
+let [row, col, bombs] = input;
 let totalCells = row * col;
-controls.setLevel();
+
 //makebombs function
 console.log(` at func.js bombs are ${bombs}, rows are ${row},cols are ${col}`);
 const makebombs = (bombs, totalCells) => {

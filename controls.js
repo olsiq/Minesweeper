@@ -1,33 +1,32 @@
-let row = 5;
-let col = 10;
-let bombs = 10;
+let row;
+let col;
+let bombs;
 export const setLevel = () => {
   let level = document.getElementById("lvl").value;
-  console.log(level);
+  let inputs;
   switch (level) {
     case "easy":
       row = 5;
       col = 10;
       bombs = 10;
-      console.log(bombs, row, col);
+      inputs = [row, col, bombs];
       break;
     case "difficult":
       row = 10;
       col = 7;
       bombs = 9;
-      console.log(bombs, row, col);
-
+      inputs = [row, col, bombs];
       break;
     case "expert":
       row = 10;
       col = 7;
       bombs = 50;
-      console.log(bombs, row, col);
+      inputs = [row, col, bombs];
       break;
 
     default:
       console.log("error");
       break;
   }
+  return inputs;
 };
-export { row, col, bombs };
