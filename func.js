@@ -49,7 +49,7 @@ const cellPosition = (cell, col, totalCells) => {
 
 //find neighbour cells function
 
-const findNeighbors = (bcell, col, x) => {
+const findNeighbors = (bcell, col, x, bombArray) => {
   let Cells = [];
   //test cell
   //console.log("bomb-cell=>" + x, "col->" + col, bcell);
@@ -125,7 +125,7 @@ const neighbours = (array) =>
   array.map((x) => {
     let position = cellPosition(x, col, totalCells);
     //console.log(`cell position is ${position},cell ${x}`);
-    let neighborCells = findNeighbors(position, col, x);
+    let neighborCells = findNeighbors(position, col, x, array);
     //console.log(`neighbour position is ${neighborCells}`);
     return neighborCells;
   });
