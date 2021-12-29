@@ -171,5 +171,9 @@ btn.addEventListener("click", (e) => {
   }
   clearGame();
   stopTimer();
+  //set the time values to 0 on new game
+  min = 0;
+  sec = 0;
+  timer.innerHTML = `${min}:${sec}`;
   makeGrid(gameArray);
 });
