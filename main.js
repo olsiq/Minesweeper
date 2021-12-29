@@ -87,6 +87,7 @@ const makeGrid = (Array) => {
   };
 
   //initialize game
+  //check (and remove) if game-over class exist
 
   Array.map((c, index) => {
     let cell = document.createElement("div");
@@ -164,6 +165,10 @@ const clearGame = () => {
 const btn = document.querySelector(".btn");
 btn.addEventListener("click", (e) => {
   e.preventDefault;
+  //remove class game-over if it exists
+  if (grid.classList.contains("game-over")) {
+    grid.classList.remove("game-over");
+  }
   clearGame();
   stopTimer();
   makeGrid(gameArray);
