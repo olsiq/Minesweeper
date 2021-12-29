@@ -64,7 +64,7 @@ body {
   cursor: pointer;
 }
 
-[data-pressed="true"] {
+[data-isopen="true"] {
   background-color: white;
 }
 [data-value="0"] {
