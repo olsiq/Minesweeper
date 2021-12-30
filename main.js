@@ -164,20 +164,26 @@ const makeGrid = (Array) => {
             cell.innerText = c;
             //if cell is open prevent from clicking it again
             decrementCellsToOpen();
+            //cell position on the first array
             let CellPosition = index + 1;
+            //store the position of the cell using the cellPosition function  from func.js
             let position = cellPosition(CellPosition, col, totalCells);
-            console.log(position);
+            //store  in an array the neighbor cells of the empty cell using the EmptyCellsNeighbors function
             let neighbors = EmptyCellsNeighbors(position, col, CellPosition);
-            console.log(neighbors);
-            let neighborsCells = neighbors.map((x) => {
+            //loop  through neighbors array
+            neighbors.map((x) => {
+              //find the class with the value x and store it as neighbor
               let neighbor = document.getElementsByClassName(`${x}`)[0];
+              //store the index of the cell x in the first array we imported from func.js
               let arrayindex = x - 1;
+              //store the value of the cell x in the first array we imported from func.js
               let ArrayIndexValue = Array[x - 1];
+              //check if neighbour cell was open
               if (neighbor.getAttribute("data-isOpen") === "false") {
+                //open the neighbor cell
                 openCell(neighbor, ArrayIndexValue, arrayindex);
               }
             });
-            console.log(neighborsCells);
             break;
 
           default:
