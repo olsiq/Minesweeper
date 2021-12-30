@@ -1,4 +1,4 @@
-import gameLogic from "./func.js";
+import { cellPosition, gameLogic } from "./func.js";
 import * as controls from "./controls.js";
 //initialize gameBoard
 let gameArray = gameLogic();
@@ -30,9 +30,12 @@ const stopTimer = () => clearInterval(Timer_Id);
 //takes as parameter the array  from the func.js
 const makeGrid = (Array) => {
   const grid = document.getElementById("grid");
-  let input = controls.setLevel();
-  let [row, col, bombs] = input;
 
+  //get the input values based on the level provided
+  let input = controls.setLevel();
+  //spread input array to variables
+  let [row, col, bombs] = input;
+  let totalCells = row * col;
   //changing the css grid
   grid.style.setProperty("--grid-rows", row);
   grid.style.setProperty("--grid-cols", col);
@@ -62,7 +65,65 @@ const makeGrid = (Array) => {
     stopTimer();
     console.log("set name and time to highscores");
   };
+  const EmptyCellsNeighbors = (cellPosition, col, x) => {
+    let Cells = [];
+    switch (cellPosition) {
+      case "top-left-cell":
+        Cells = [x + 1, x + col, x + (col + 1)];
 
+        break;
+      case "top-right-cell":
+        Cells = [x - 1, x + (col - 1), x + col];
+
+        break;
+      case "buttom-left-cell":
+        Cells = [x - col, x - (col - 1), x + 1];
+
+        break;
+      case "buttom-right-cell":
+        Cells = [x - 1, x - col, x - (col + 1)];
+
+        break;
+      case "buttom-right-col":
+        Cells = [x - 1, x - col, x - (col + 1)];
+
+        break;
+      case "first-column":
+        Cells = [x - col, x - (col - 1), x + 1, x + col, x + (col + 1)];
+
+        break;
+      case "last-column":
+        Cells = [x - col, x + col, x - 1, x - (col + 1), x + (col - 1)];
+
+        break;
+      case "first-row":
+        Cells = [x - 1, x + 1, x + (col - 1), x + col, x + (col + 1)];
+
+        break;
+      case "last-row":
+        Cells = [x - 1, x + 1, x - (col + 1), x - (col - 1), x - col];
+
+        break;
+      case "middle":
+        Cells = [
+          x + 1,
+          x - 1,
+          x - col,
+          x + col,
+          x - (col - 1),
+          x - (col + 1),
+          x + (col + 1),
+          x + (col - 1),
+        ];
+
+        break;
+
+      default:
+        console.error("switch statement");
+        break;
+    }
+    return Cells;
+  };
   //initialize game
   //check (and remove) if game-over class exist
 
@@ -77,44 +138,59 @@ const makeGrid = (Array) => {
 
     let x = cell.getAttribute("data-isOpen");
     cell.addEventListener("click", () => {
-      cell.setAttribute("data-isOpen", true);
-
       //the first time users click timer function executes
       //firstClick =false so the timer function doesnt executes again
       if (firstClick == true) {
         firstClick = false;
         startTimer();
       }
-      switch (c) {
-        case "bomb":
-          cell.innerHTML = "💣";
-          cell.classList.add("bomb");
-          cell.setAttribute("data-hasBomb", true);
-          //timer will stop
-          stopTimer();
-          //disable clicks on the cells
-          gameOver(grid);
 
-          break;
-        case "":
-          cell.setAttribute("data-isOpen", true);
-          cell.setAttribute("data-value", "0");
-          cell.innerText = "";
-          //if cell is open prevent from clicking it again
-          disableClick(cell);
-          decrementCellsToOpen();
+      const openCell = (cell, c, index) => {
+        cell.setAttribute("data-isOpen", true);
+        switch (c) {
+          case "bomb":
+            cell.innerHTML = "💣";
+            cell.classList.add("bomb");
+            cell.setAttribute("data-hasBomb", true);
+            //timer will stop
+            stopTimer();
+            //disable clicks on the cells
+            gameOver(grid);
 
-          break;
+            break;
+          case "":
+            disableClick(cell);
+            cell.setAttribute("data-value", c);
+            cell.innerText = c;
+            //if cell is open prevent from clicking it again
+            decrementCellsToOpen();
+            let CellPosition = index + 1;
+            let position = cellPosition(CellPosition, col, totalCells);
+            console.log(position);
+            let neighbors = EmptyCellsNeighbors(position, col, CellPosition);
+            console.log(neighbors);
+            let neighborsCells = neighbors.map((x) => {
+              let neighbor = document.getElementsByClassName(`${x}`)[0];
+              let arrayindex = x - 1;
+              let ArrayIndexValue = Array[x - 1];
+              if (neighbor.getAttribute("data-isOpen") === "false") {
+                openCell(neighbor, ArrayIndexValue, arrayindex);
+              }
+            });
+            console.log(neighborsCells);
+            break;
 
-        default:
-          cell.setAttribute("data-isOpen", true);
-          cell.setAttribute("data-value", c);
-          cell.innerText = c;
-          //if cell is open prevent from clicking it again
-          disableClick(cell);
-          decrementCellsToOpen();
-          break;
-      }
+          default:
+            disableClick(cell);
+            cell.setAttribute("data-value", c);
+            cell.innerText = c;
+            //if cell is open prevent from clicking it again
+
+            decrementCellsToOpen();
+            break;
+        }
+      };
+      openCell(cell, c, index);
     });
 
     grid.appendChild(cell).className = "grid-item";
@@ -123,6 +199,7 @@ const makeGrid = (Array) => {
     const disableClick = (x) => {
       x.style.pointerEvents = "none";
     };
+
     //gameOver function
     const gameOver = (x) => {
       x.classList.add("game-over");
