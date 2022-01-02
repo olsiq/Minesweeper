@@ -1,7 +1,100 @@
 import * as controls from "./controls.js";
+//find neighbour cells function
+//find neighbour cells function
+export const findNeighbors = (cellPosition, col, x, bombArray) => {
+  let Cells = [];
+  switch (cellPosition) {
+    case "top-left-cell":
+      Cells = [x + 1, x + col, x + (col + 1)];
 
+      break;
+    case "top-right-cell":
+      Cells = [x - 1, x + (col - 1), x + col];
+
+      break;
+    case "buttom-left-cell":
+      Cells = [x - col, x - (col - 1), x + 1];
+
+      break;
+    case "buttom-right-cell":
+      Cells = [x - 1, x - col, x - (col + 1)];
+
+      break;
+    case "buttom-right-col":
+      Cells = [x - 1, x - col, x - (col + 1)];
+
+      break;
+    case "first-column":
+      Cells = [x - col, x - (col - 1), x + 1, x + col, x + (col + 1)];
+
+      break;
+    case "last-column":
+      Cells = [x - col, x + col, x - 1, x - (col + 1), x + (col - 1)];
+
+      break;
+    case "first-row":
+      Cells = [x - 1, x + 1, x + (col - 1), x + col, x + (col + 1)];
+
+      break;
+    case "last-row":
+      Cells = [x - 1, x + 1, x - (col + 1), x - (col - 1), x - col];
+
+      break;
+    case "middle":
+      Cells = [
+        x + 1,
+        x - 1,
+        x - col,
+        x + col,
+        x - (col - 1),
+        x - (col + 1),
+        x + (col + 1),
+        x + (col - 1),
+      ];
+
+      break;
+
+    default:
+      console.error("switch statement");
+      break;
+  }
+  if (Cells.includes(bombArray)) {
+    Cells = Cells.map((x) => {
+      if (x.includes(bombArray)) {
+        return "bomb";
+      } else {
+        return x;
+      }
+    });
+  }
+  return Cells;
+}; // find Cells Position function
+export const cellPosition = (cell, col, totalCells) => {
+  let position = "";
+  if (cell === 1) {
+    position = "top-left-cell";
+  } else if (cell === col) {
+    position = "top-right-cell";
+  } else if (cell === totalCells - (col - 1)) {
+    position = "buttom-left-cell";
+  } else if (cell === totalCells) {
+    position = "buttom-right-cell";
+  } else if (cell > 1 && cell < col) {
+    position = "first-row";
+  } else if (cell > totalCells - col && cell < totalCells) {
+    position = "last-row";
+  } else if (cell % col === 1) {
+    position = "first-column";
+  } else if (cell % col === 0) {
+    position = "last-column";
+  } else {
+    position = "middle";
+  }
+
+  return position;
+};
 //game array
-const gameLogic = () => {
+export const gameLogic = () => {
   //input values
 
   let input = controls.setLevel();
@@ -21,107 +114,7 @@ const gameLogic = () => {
     randomNumbers.sort(() => Math.random() - 0.5);
     bombArray = randomNumbers.slice(0, bombs);
     return bombArray;
-  };
-  // find Cells Position function
-  const cellPosition = (cell, col, totalCells) => {
-    let position = "";
-    if (cell === 1) {
-      position = "top-left-cell";
-    } else if (cell === col) {
-      position = "top-right-cell";
-    } else if (cell === totalCells - (col - 1)) {
-      position = "buttom-left-cell";
-    } else if (cell === totalCells) {
-      position = "buttom-right-cell";
-    } else if (cell > 1 && cell < col) {
-      position = "first-row";
-    } else if (cell > totalCells - col && cell < totalCells) {
-      position = "last-row";
-    } else if (cell % col === 1) {
-      position = "first-column";
-    } else if (cell % col === 0) {
-      position = "last-column";
-    } else {
-      position = "middle";
-    }
-
-    return position;
-  };
-
-  //find neighbour cells function
-
-  const findNeighbors = (bcell, col, x, bombArray) => {
-    let Cells = [];
-    //test cell
-    //console.log("bomb-cell=>" + x, "col->" + col, bcell);
-
-    switch (bcell) {
-      case "top-left-cell":
-        Cells = [x + 1, x + col, x + (col + 1)];
-
-        break;
-      case "top-right-cell":
-        Cells = [x - 1, x + (col - 1), x + col];
-
-        break;
-      case "buttom-left-cell":
-        Cells = [x - col, x - (col - 1), x + 1];
-
-        break;
-      case "buttom-right-cell":
-        Cells = [x - 1, x - col, x - (col + 1)];
-
-        break;
-      case "buttom-right-col":
-        Cells = [x - 1, x - col, x - (col + 1)];
-
-        break;
-      case "first-column":
-        Cells = [x - col, x - (col - 1), x + 1, x + col, x + (col + 1)];
-
-        break;
-      case "last-column":
-        Cells = [x - col, x + col, x - 1, x - (col + 1), x + (col - 1)];
-
-        break;
-      case "first-row":
-        Cells = [x - 1, x + 1, x + (col - 1), x + col, x + (col + 1)];
-
-        break;
-      case "last-row":
-        Cells = [x - 1, x + 1, x - (col + 1), x - (col - 1), x - col];
-
-        break;
-      case "middle":
-        Cells = [
-          x + 1,
-          x - 1,
-          x - col,
-          x + col,
-          x - (col - 1),
-          x - (col + 1),
-          x + (col + 1),
-          x + (col - 1),
-        ];
-
-        break;
-
-      default:
-        console.error("switch statement");
-        break;
-    }
-    if (Cells.includes(bombArray)) {
-      Cells = Cells.map((x) => {
-        if (x.includes(bombArray)) {
-          return "bomb";
-        } else {
-          return x;
-        }
-      });
-    }
-    return Cells;
-  };
-  //find cells that are neighbours of bomb cells
+  }; //find cells that are neighbours of bomb cells
   const neighbours = (array) =>
     array.map((x) => {
       let position = cellPosition(x, col, totalCells);
@@ -130,6 +123,7 @@ const gameLogic = () => {
       //console.log(`neighbour position is ${neighborCells}`);
       return neighborCells;
     });
+
   //game board
   const gameArray = new Array(totalCells).fill().map((_, index) => index + 1);
   const bombArray = makebombs(bombs, totalCells).sort((a, b) => a - b);
@@ -156,6 +150,6 @@ const gameLogic = () => {
 
     return innerValues(x);
   });
+  console.log(view);
   return view;
 };
-export default gameLogic;
