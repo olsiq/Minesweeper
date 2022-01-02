@@ -1,8 +1,3 @@
-//need changes
-//convert time to only seconds
-//examble 1:3 ==> 63
-//variables
-//const scoresBtn = document.getElementById("scores");
 import { gameLevel } from "./func.js";
 const returnNullScores = (level) => {
   const scoresTable = [
@@ -46,21 +41,5 @@ export const checkLocalStorage = (level) => {
 };
 checkLocalStorage(gameLevel);
 
-// let level;
-
-// let player1 = { name: "as1", time: "100" };
-// let player2 = { name: "as1", time: "3" };
-// let player3 = { name: "as3", time: "54" };
-// let player4 = { name: "as4", time: "67" };
-// let score = [];
-// score.push(player1, player2, player3, player4);
-// //convert string to int
-// score.forEach((element) => {
-//   element.time = parseInt(element.time);
-// });
-// console.log(score);
-// let player5 = { name: "djkl", time: 3 };
-// score.push(player5);
-// let newarray = score.sort((a, b) => a.time - b.time);
-// newarray = newarray.slice(0, 3);
-// console.log(newarray);
+//get the array of objects from local storage based on the level
+export const getScores = (level) => JSON.parse(localStorage.getItem(level));
