@@ -1,5 +1,6 @@
 import { cellPosition, gameLogic } from "./func.js";
 import * as controls from "./controls.js";
+import { checkLocalStorage } from "./localstorage.js";
 //initialize gameBoard
 let gameArray = gameLogic();
 //initialize timer
@@ -34,7 +35,7 @@ const makeGrid = (Array) => {
   //get the input values based on the level provided
   let input = controls.setLevel();
   //spread input array to variables
-  let [row, col, bombs] = input;
+  let [row, col, bombs, level] = input;
   let totalCells = row * col;
   //changing the css grid
   grid.style.setProperty("--grid-rows", row);
@@ -212,6 +213,7 @@ const makeGrid = (Array) => {
       console.log("game over");
     };
   });
+  checkLocalStorage(level);
 };
 
 makeGrid(gameArray);

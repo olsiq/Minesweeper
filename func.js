@@ -93,12 +93,14 @@ export const cellPosition = (cell, col, totalCells) => {
 
   return position;
 };
+export let gameLevel;
 //game array
 export const gameLogic = () => {
   //input values
 
   let input = controls.setLevel();
-  let [row, col, bombs] = input;
+  let [row, col, bombs, level] = input;
+  gameLevel = level;
   let totalCells = row * col;
   console.log(
     ` at func.js bombs are ${bombs}, rows are ${row},cols are ${col}`

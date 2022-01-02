@@ -3,6 +3,7 @@
 //examble 1:3 ==> 63
 //variables
 //const scoresBtn = document.getElementById("scores");
+import { gameLevel } from "./func.js";
 const returnNullScores = (level) => {
   const scoresTable = [
     { name: "-", time: "-" },
@@ -16,7 +17,7 @@ const returnNullScores = (level) => {
 };
 //check if the level of the game has stored any scores.if not insert null scores
 
-const checkLocalStorage = (level) => {
+export const checkLocalStorage = (level) => {
   console.log(level);
   switch (level) {
     case "easy": {
@@ -43,23 +44,23 @@ const checkLocalStorage = (level) => {
     }
   }
 };
+checkLocalStorage(gameLevel);
 
->>>>>>> Stashed changes
-let level;
+// let level;
 
-let player1 = { name: "as1", time: "100" };
-let player2 = { name: "as1", time: "3" };
-let player3 = { name: "as3", time: "54" };
-let player4 = { name: "as4", time: "67" };
-let score = [];
-score.push(player1, player2, player3, player4);
-//convert string to int
-score.forEach((element) => {
-  element.time = parseInt(element.time);
-});
-console.log(score);
-let player5 = { name: "djkl", time: 3 };
-score.push(player5);
-let newarray = score.sort((a, b) => a.time - b.time);
-newarray = newarray.slice(0, 3);
-console.log(newarray);
+// let player1 = { name: "as1", time: "100" };
+// let player2 = { name: "as1", time: "3" };
+// let player3 = { name: "as3", time: "54" };
+// let player4 = { name: "as4", time: "67" };
+// let score = [];
+// score.push(player1, player2, player3, player4);
+// //convert string to int
+// score.forEach((element) => {
+//   element.time = parseInt(element.time);
+// });
+// console.log(score);
+// let player5 = { name: "djkl", time: 3 };
+// score.push(player5);
+// let newarray = score.sort((a, b) => a.time - b.time);
+// newarray = newarray.slice(0, 3);
+// console.log(newarray);
