@@ -31,41 +31,44 @@
       </select>
       <div class="btns">
         <button for="level" class="btn">start</button
-        ><button id="scores">high score</button>
-      </div>
+        >
+      </div><div id="scores" class="difficult"><p>high score</p>
       <div class="tabs">
-        <button class="tablinks" onclick="openCity(event, 'London')">
+        <button class="tablinks easy" onclick="openCity(event, 'London')">
           Easy
         </button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">
+        <button class="tablinks difficult" onclick="openCity(event, 'Paris')">
           Difficult
         </button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">
+        <button class="tablinks expert" onclick="openCity(event, 'Tokyo')">
           Expert
         </button>
-        <!-- Tab content -->
+      </div>
+      <div class="divider"></div>
+      <div class="Contents ">
         <div class="first tabContent" >
          <div class="name">1</div>
           <div class="time">1</div>
         </div>
-
         <div class="second tabContent" >
          <div class="name">2</div>
           <div class="time">2</div>
         </div>
-
         <div class="third tabContent" >
-         <div class="name">3</div>
+          <div class="name">3</div>
           <div class="time">3</div>
+        </div>
         <div class="forth tabContent" >
-           <div class="name">4</div>
+            <div class="name">4</div>
             <div class="time">4</div>
+          </div>
         <div class="fifth tabContent" >
-             <div class="name">5</div>
-              <div class="time">5</div>
+            <div class="name">5</div>
+            <div class="time">5</div>
         </div>
       </div>
-    </div>
+      </div>
+    
   </body>
 
   <script src="controls.js" type="module"></script>

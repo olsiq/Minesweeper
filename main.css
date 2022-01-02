@@ -120,3 +120,86 @@ body {
 .lvl-wrapper {
   display: flex;
 }
+
+#scores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px 20px 20px 20px;
+  width: 100%;
+}
+#scores > p {
+  border: 2px dotted white;
+  width: 50%;
+  text-align: center;
+  height: 25px;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+.tablinks {
+  height: 30px;
+  width: 80px;
+  border-style: none;
+  letter-spacing: 1.1px;
+  font-weight: 700;
+}
+.tablinks:hover {
+  cursor: pointer;
+  background-color: rgba(250, 250, 250, 0.644);
+  color: black;
+}
+
+.divider {
+  height: 10px;
+}
+.Contents {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.37);
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+}
+.tabContent:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.623);
+  color: black;
+}
+.tabContent:last-child {
+  border-radius: 0 0 20px 20px;
+}
+.easy {
+  background-color: blue;
+  color: white;
+}
+.difficult {
+  background-color: green;
+  color: white;
+}
+.expert {
+  background-color: rgb(255, 102, 0);
+  color: white;
+}
+.name {
+  width: 50%;
+}
+.name:before {
+  content: "name:   ";
+  padding-left: 10px;
+}
+
+.time:before {
+  content: "time:   ";
+}
