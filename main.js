@@ -1,6 +1,6 @@
 import { cellPosition, gameLogic } from "./func.js";
 import * as controls from "./controls.js";
-import { checkLocalStorage, getScores } from "./localstorage.js";
+import { checkLocalStorage, getScores, setScores } from "./localstorage.js";
 //initialize gameBoard
 let gameArray = gameLogic();
 //initialize timer
@@ -209,7 +209,7 @@ const makeGrid = (Array) => {
 
     //gameOver function
     const gameOver = (x) => {
-      console.log(getScores(level));
+      setScores("olsi", 2, level);
       x.classList.add("game-over");
       console.log("game over");
     };
