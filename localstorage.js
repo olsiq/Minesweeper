@@ -3,11 +3,6 @@
 //examble 1:3 ==> 63
 //variables
 //const scoresBtn = document.getElementById("scores");
-<<<<<<< Updated upstream
-
-//check the level of the game
-=======
-//
 const returnNullScores = (level) => {
   const scoresTable = [
     { name: "-", time: "-" },
