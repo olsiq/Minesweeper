@@ -10,6 +10,14 @@ body {
   --grid-cols: 1;
   --grid-rows: 1;
 }
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.game > h1 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
 
 .wrapper {
   background-color: white;
@@ -219,4 +227,12 @@ body {
 
 .time:before {
   content: "time:   ";
+}
+
+@media only screen and (min-width: 750px) {
+  body {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+  }
 }
