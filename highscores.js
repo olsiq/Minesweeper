@@ -1,14 +1,27 @@
 import { getScores } from "./localstorage.js";
+const scoresContainer = document.getElementById("scores");
 
 //add click event on btn with id easy
 const btnScoreE = document.getElementById("easy");
-btnScoreE.addEventListener("click", () => viewScore("easy"));
+btnScoreE.addEventListener("click", () => {
+  viewScore("easy");
+  scoresContainer.classList.remove("difficult", "expert");
+  scoresContainer.classList.add("easy");
+});
 //add click event on btn with id difficult
 const btnScoreD = document.getElementById("difficult");
-btnScoreD.addEventListener("click", () => viewScore("difficult"));
+btnScoreD.addEventListener("click", () => {
+  viewScore("difficult");
+  scoresContainer.classList.remove("easy", "expert");
+  scoresContainer.classList.add("difficult");
+});
 //add click event on btn with id expert
 const btnScoreEX = document.getElementById("expert");
-btnScoreEX.addEventListener("click", () => viewScore("expert"));
+btnScoreEX.addEventListener("click", () => {
+  viewScore("expert");
+  scoresContainer.classList.remove("easy", "difficult");
+  scoresContainer.classList.add("expert");
+});
 
 //variables
 
@@ -23,7 +36,7 @@ const forth_time = document.getElementById("forth-time");
 const fifth_name = document.getElementById("fifth-name");
 const fifth_time = document.getElementById("fifth-time");
 
-const viewScore = (x) => {
+export const viewScore = (x) => {
   let scoreTable = getScores(x);
   let [first, second, third, forth, fifth] = scoreTable;
   first_name.innerHTML = first.name;

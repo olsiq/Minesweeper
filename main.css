@@ -147,6 +147,13 @@ body {
   border-style: none;
   letter-spacing: 1.1px;
   font-weight: 700;
+  border-top: 2px solid white;
+}
+.tablinks:first-child {
+  border-left: 2px solid white;
+}
+.tablinks:last-child {
+  border-right: 2px solid white;
 }
 .tablinks:hover {
   cursor: pointer;

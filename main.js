@@ -1,6 +1,7 @@
 import { cellPosition, gameLogic } from "./func.js";
 import * as controls from "./controls.js";
 import { checkLocalStorage, getScores, setScores } from "./localstorage.js";
+import { viewScore } from "./highscores.js";
 //initialize gameBoard
 let gameArray = gameLogic();
 //initialize timer
@@ -215,6 +216,7 @@ const makeGrid = (Array) => {
     };
   });
   checkLocalStorage(level);
+  viewScore(level);
 };
 
 makeGrid(gameArray);
