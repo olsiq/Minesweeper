@@ -13,28 +13,20 @@ const returnNullScores = (level) => {
 //check if the level of the game has stored any scores.if not insert null scores
 
 export const checkLocalStorage = (level) => {
-  console.log(level);
   switch (level) {
     case "easy": {
-      localStorage.getItem("easy") !== null
-        ? console.log("there is smth there")
-        : returnNullScores(level);
+      localStorage.getItem("easy") !== null ? "" : returnNullScores(level);
       break;
     }
     case "difficult": {
-      localStorage.getItem("difficult") !== null
-        ? console.log("there is smth there")
-        : returnNullScores(level);
+      localStorage.getItem("difficult") !== null ? "" : returnNullScores(level);
       break;
     }
     case "expert": {
-      localStorage.getItem("expert") !== null
-        ? console.log("there is smth there")
-        : returnNullScores(level);
+      localStorage.getItem("expert") !== null ? "" : returnNullScores(level);
       break;
     }
     default: {
-      console.log("not an accepted value");
       break;
     }
   }
@@ -45,9 +37,8 @@ checkLocalStorage(gameLevel);
 export const getScores = (level) => JSON.parse(localStorage.getItem(level));
 
 export const setScores = (name, time, level) => {
-  console.log(time, name);
   name === "" ? (name = `user ${time}`) : "";
-  console.log(time, name);
+
   let preVal = getScores(level);
 
   //remove the previous values
@@ -72,7 +63,6 @@ export const setScores = (name, time, level) => {
       return x;
     })
     .filter((x, index) => index < 5);
-  console.log(newVal);
 
   //set the new array of objects to the LocalStorage
 

@@ -148,6 +148,7 @@ const makeGrid = (Array) => {
     cell.setAttribute("data-isOpen", false);
     cell.setAttribute("data-hasBomb", "N/A");
     cell.setAttribute("isFlaged", false);
+
     //right click event
     cell.addEventListener("contextmenu", (e) => {
       let x = cell.getAttribute("isFlaged");

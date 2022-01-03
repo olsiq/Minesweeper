@@ -102,9 +102,6 @@ export const gameLogic = () => {
   let [row, col, bombs, level] = input;
   gameLevel = level;
   let totalCells = row * col;
-  console.log(
-    ` at func.js bombs are ${bombs}, rows are ${row},cols are ${col}`
-  );
 
   //main functions
 
@@ -152,6 +149,7 @@ export const gameLogic = () => {
 
     return innerValues(x);
   });
+  console.log("below are the values of each cell");
   console.log(view);
   return view;
 };
