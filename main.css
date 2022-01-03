@@ -159,9 +159,11 @@ body {
 }
 .tablinks:first-child {
   border-left: 2px solid white;
+  border-top-left-radius: 10px;
 }
 .tablinks:last-child {
   border-right: 2px solid white;
+  border-top-right-radius: 10px;
 }
 .tablinks:hover {
   cursor: pointer;

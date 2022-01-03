@@ -228,7 +228,7 @@ const clearGame = () => {
     gameBoard.removeChild(gameBoard.lastElementChild);
   }
 };
-const btn = document.querySelector(".btn");
+const btn = document.querySelector(".btn-start");
 btn.addEventListener("click", (e) => {
   e.preventDefault;
   //remove class game-over if it exists
