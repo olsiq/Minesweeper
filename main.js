@@ -65,7 +65,9 @@ const makeGrid = (Array) => {
   //you win function
   const youWin = () => {
     stopTimer();
-    console.log("set name and time to highscores");
+    let time = min * 60 + sec;
+    let name = "miaou" + time;
+    setScores((name = "user"), time, level);
   };
   const EmptyCellsNeighbors = (cellPosition, col, x) => {
     let Cells = [];
