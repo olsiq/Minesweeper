@@ -54,8 +54,14 @@ const makeGrid = (Array) => {
   flagCounter.innerHTML = flags;
 
   //decrement flags function
-  const decrementFlags = () =>
+  const decrementFlags = () => {
     flags === 0 ? console.log("no more flags") : flags--;
+    flagCounter.innerHTML = flags;
+  };
+  const incrementFlags = () => {
+    flags === bombs ? "" : flags++;
+    flagCounter.innerHTML = flags;
+  };
 
   //decrement cells function
   const decrementCellsToOpen = () => {
@@ -66,8 +72,13 @@ const makeGrid = (Array) => {
   const youWin = () => {
     stopTimer();
     let time = min * 60 + sec;
-    let name = "miaou" + time;
-    setScores((name = "user"), time, level);
+    grid.classList.add("game-over");
+    //set time out so the class can take effect before the alert and then we reload to update the game
+    setTimeout(() => {
+      let name = prompt("Congratulation,please enter your name");
+      setScores(name, time, level);
+      history.go();
+    }, 100);
   };
   const EmptyCellsNeighbors = (cellPosition, col, x) => {
     let Cells = [];
@@ -137,8 +148,24 @@ const makeGrid = (Array) => {
     cell.setAttribute("data-isOpen", false);
     cell.setAttribute("data-hasBomb", "N/A");
     cell.setAttribute("isFlaged", false);
-
-    //timer section
+    //right click event
+    cell.addEventListener("contextmenu", (e) => {
+      let x = cell.getAttribute("isFlaged");
+      e.preventDefault();
+      console.log(cell.getAttribute("isFlaged"));
+      if (x === "false") {
+        if (flags > 0) {
+          console.log("its false");
+          cell.setAttribute("isFlaged", true);
+          cell.innerHTML = "⚑";
+          decrementFlags();
+        }
+      } else {
+        cell.setAttribute("isFlaged", false);
+        cell.innerHTML = "";
+        incrementFlags();
+      }
+    });
 
     let x = cell.getAttribute("data-isOpen");
     cell.addEventListener("click", () => {
@@ -174,6 +201,7 @@ const makeGrid = (Array) => {
             let position = cellPosition(CellPosition, col, totalCells);
             //store  in an array the neighbor cells of the empty cell using the EmptyCellsNeighbors function
             let neighbors = EmptyCellsNeighbors(position, col, CellPosition);
+
             //loop  through neighbors array
             neighbors.map((x) => {
               //find the class with the value x and store it as neighbor
@@ -183,7 +211,10 @@ const makeGrid = (Array) => {
               //store the value of the cell x in the first array we imported from func.js
               let ArrayIndexValue = Array[x - 1];
               //check if neighbour cell was open
-              if (neighbor.getAttribute("data-isOpen") === "false") {
+              if (
+                neighbor.getAttribute("data-isOpen") === "false" ||
+                neighbor.getAttribute("isFlaged") === false
+              ) {
                 //open the neighbor cell
                 openCell(neighbor, ArrayIndexValue, arrayindex);
               }
@@ -200,7 +231,9 @@ const makeGrid = (Array) => {
             break;
         }
       };
-      openCell(cell, c, index);
+      if (cell.getAttribute("isFlaged") === "false") {
+        openCell(cell, c, index);
+      }
     });
 
     grid.appendChild(cell).className = "grid-item";
@@ -213,7 +246,11 @@ const makeGrid = (Array) => {
     //gameOver function
     const gameOver = (x) => {
       x.classList.add("game-over");
-      console.log("game over");
+      //set time out so the class can take effect before the alert and then we reload to update the game
+      setTimeout(() => {
+        alert("You click a mine, Game Over");
+        history.go();
+      }, 100);
     };
   });
   checkLocalStorage(level);

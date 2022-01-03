@@ -228,6 +228,9 @@ body {
 .time:before {
   content: "time:   ";
 }
+.time:after {
+  content: " seconds";
+}
 
 @media only screen and (min-width: 750px) {
   body {

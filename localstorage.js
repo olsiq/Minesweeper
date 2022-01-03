@@ -45,6 +45,9 @@ checkLocalStorage(gameLevel);
 export const getScores = (level) => JSON.parse(localStorage.getItem(level));
 
 export const setScores = (name, time, level) => {
+  console.log(time, name);
+  name === "" ? (name = `user ${time}`) : "";
+  console.log(time, name);
   let preVal = getScores(level);
 
   //remove the previous values
