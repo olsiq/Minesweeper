@@ -1,6 +1,13 @@
+import { checkLocalStorage } from "./localstorage.js";
+
 let row;
 let col;
 let bombs;
+//if no keys are found on localStorage add them
+let levels = ["easy", "difficult", "expert"];
+levels.forEach((element) => {
+  checkLocalStorage(element);
+});
 export const setLevel = () => {
   let level = document.getElementById("lvl").value;
   let inputs;

@@ -254,7 +254,6 @@ const makeGrid = (Array) => {
       }, 100);
     };
   });
-  checkLocalStorage(level);
   viewScore(level);
 };
 

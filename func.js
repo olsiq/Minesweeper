@@ -1,4 +1,5 @@
 import * as controls from "./controls.js";
+import { checkLocalStorage } from "./localstorage.js";
 //find neighbour cells function
 //find neighbour cells function
 export const findNeighbors = (cellPosition, col, x, bombArray) => {
