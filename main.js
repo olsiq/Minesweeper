@@ -212,7 +212,6 @@ const makeGrid = (Array) => {
 
     //gameOver function
     const gameOver = (x) => {
-      setScores("olsi", 2, level);
       x.classList.add("game-over");
       console.log("game over");
     };
