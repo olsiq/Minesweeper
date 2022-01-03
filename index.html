@@ -34,37 +34,37 @@
         >
       </div><div id="scores" class="difficult"><p>high score</p>
       <div class="tabs">
-        <button class="tablinks easy" onclick="openCity(event, 'London')">
+        <button id="easy" class="tablinks easy" >
           Easy
         </button>
-        <button class="tablinks difficult" onclick="openCity(event, 'Paris')">
+        <button id ="difficult" class="tablinks difficult" >
           Difficult
         </button>
-        <button class="tablinks expert" onclick="openCity(event, 'Tokyo')">
+        <button id="expert" class="tablinks expert" >
           Expert
         </button>
       </div>
       <div class="divider"></div>
       <div class="Contents ">
-        <div class="first tabContent" >
-         <div class="name">1</div>
-          <div class="time">1</div>
+        <div class=" tabContent" >
+         <div  id="first-name" class="first name"></div>
+          <div id="first-time" class="first time"></div>
         </div>
-        <div class="second tabContent" >
-         <div class="name">2</div>
-          <div class="time">2</div>
+        <div class="tabContent" >
+         <div id="second-name" class="second name"></div>
+          <div id="second-time" class="second time"></div>
         </div>
-        <div class="third tabContent" >
-          <div class="name">3</div>
-          <div class="time">3</div>
+        <div class="tabContent" >
+          <div id="third-name" class="third name"></div>
+          <div id="third-time" class="third time"></div>
         </div>
-        <div class="forth tabContent" >
-            <div class="name">4</div>
-            <div class="time">4</div>
+        <div class="tabContent" >
+            <div id="forth-name" class="forth name"></div>
+            <div id="forth-time" class="forth time"></div>
           </div>
-        <div class="fifth tabContent" >
-            <div class="name">5</div>
-            <div class="time">5</div>
+        <div class="tabContent" >
+            <div id="fifth-name" class="fifth name"></div>
+            <div id="fifth-time" class="fifth time"></div>
         </div>
       </div>
       </div>
@@ -75,4 +75,5 @@
   <script src="func.js" type="module"></script>
   <script src="main.js" type="module"></script>
   <script src="localstorage.js" type="module"></script>
+  <script src="highscores.js" type="module" defer></script>
 </html>
