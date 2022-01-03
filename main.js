@@ -153,10 +153,9 @@ const makeGrid = (Array) => {
     cell.addEventListener("contextmenu", (e) => {
       let x = cell.getAttribute("isFlaged");
       e.preventDefault();
-      console.log(cell.getAttribute("isFlaged"));
+
       if (x === "false") {
         if (flags > 0) {
-          console.log("its false");
           cell.setAttribute("isFlaged", true);
           cell.innerHTML = "⚑";
           decrementFlags();
@@ -196,6 +195,7 @@ const makeGrid = (Array) => {
             cell.innerText = c;
             //if cell is open prevent from clicking it again
             decrementCellsToOpen();
+
             //cell position on the first array
             let CellPosition = index + 1;
             //store the position of the cell using the cellPosition function  from func.js
