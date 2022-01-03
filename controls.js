@@ -15,7 +15,7 @@ export const setLevel = () => {
     case "easy":
       row = 5;
       col = 10;
-      bombs = 5;
+      bombs = 3;
       inputs = [row, col, bombs, level];
       break;
     case "difficult":
